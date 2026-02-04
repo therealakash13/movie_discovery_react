@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Pacifico", cursive;
+  --font-secondary: "Red Hat Display", sans-serif;
+
+  --color-primary: #db0000;
+  --color-primary-dark: #831010;
+  --color-secondary: #564d4d;
+  --color-bg: #ffffff;
+  --color-bg-dark: #221f1f;
+  --color-text: #221f1f;
+  --color-text-dark: #ffffff;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+a.active{
+  font-weight: 600;
+  color: #db0000;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-color: #db0000;
+  background: rgb(219, 0, 0, .2);
+}
