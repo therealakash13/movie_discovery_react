@@ -47,7 +47,7 @@ export default function Navbar() {
             setTheme((prev) => (prev === "dark" ? "light" : "dark"))
           }
         >
-          {theme === "dark" ? <Moon /> : <Sun />}
+          {theme === "dark" ? "🌙" : "🔆"}
         </button>
       </ul>
     </nav>
