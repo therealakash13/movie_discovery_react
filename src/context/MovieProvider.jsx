@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { MovieContext } from "./MovieContext";
+import { initialState } from "./initialState";
+import { reducer } from "./reducer";
 
 export default function MovieProvider({ children }) {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const root = document.documentElement;
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
 
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
-
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  useEffect(() => {
+    document.documentElement.classList.toggle(
+      "dark",
+      state.user.theme === "dark",
+    );
+  }, [state.user.theme]);
 
   return (
-    <MovieContext.Provider value={{ theme, setTheme }}>
+    <MovieContext.Provider value={{ state, dispatch }}>
       {children}
     </MovieContext.Provider>
   );

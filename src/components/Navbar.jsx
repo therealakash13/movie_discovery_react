@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { MovieContext } from "../context/MovieContext";
-import { Moon, Sun } from "../assets/SVGComponents";
+import { TOGGLE_THEME } from "../context/action";
 
 export default function Navbar() {
-  const { theme, setTheme } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
   return (
     <nav className="flex items-center justify-between py-5">
@@ -43,11 +43,9 @@ export default function Navbar() {
         </NavLink>
         <button
           className="cursor-pointer"
-          onClick={() =>
-            setTheme((prev) => (prev === "dark" ? "light" : "dark"))
-          }
+          onClick={() => dispatch({ type: TOGGLE_THEME })}
         >
-          {theme === "dark" ? "🌙" : "🔆"}
+          {state.user.theme === "dark" ? "🌙" : "🔆"}
         </button>
       </ul>
     </nav>

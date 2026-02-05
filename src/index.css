@@ -24,3 +24,24 @@ a.active{
   text-decoration-color: #db0000;
   background: rgb(219, 0, 0, .2);
 }
+
+/* Hide scrollbar background */
+.card::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Track (background) */
+.card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb (the draggable part) */
+.card::-webkit-scrollbar-thumb {
+  background-color: #564d4d;
+  border-radius: 10px;
+}
+
+/* On hover – slightly brighter */
+.card::-webkit-scrollbar-thumb:hover {
+  background-color: #716363;
+}
