@@ -23,20 +23,23 @@ export function reducer(state, action) {
         ui: { loading: true, error: null },
       };
 
-    case SET_MOVIE_LIST: {
-      const { category, data } = action.payload;
+    case "SET_MOVIE_LIST": {
+      const { category, page, data, totalPages } = action.payload;
 
       return {
         ...state,
-        ui: { loading: false, error: null },
         movies: {
           ...state.movies,
-          [category]: data,
+          [category]: {
+            ...state.movies[category],
+            totalPages,
+            pages: {
+              ...state.movies[category].pages,
+              [page]: data,
+            },
+          },
         },
-        cache: {
-          ...state.cache,
-          [category]: Date.now(),
-        },
+        ui: { loading: false, error: null },
       };
     }
 

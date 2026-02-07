@@ -1,18 +1,19 @@
 export const defaultState = {
   movies: {
-    trending: [],
-    popular: [],
-    topRated: [],
-    upcoming: [],
-    search: [],
+    trending: { totalPages: null, pages: {} },
+    popular: { totalPages: null, pages: {} },
+    topRated: { totalPages: null, pages: {} },
+    upcoming: { totalPages: null, pages: {} },
+    search: { totalPages: null, pages: {} },
     details: null,
   },
 
   cache: {
-    trending: null,
-    popular: null,
-    topRated: null,
-    upcoming: null,
+    trending: {},
+    popular: {},
+    topRated: {},
+    upcoming: {},
+    search: {},
   },
 
   ui: {

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
 
-const CACHE_TTL = 1000 * 60 * 10; // 10 min
+// const CACHE_TTL = 1000 * 60 * 10; // 10 min
 
 const options = {
   method: "GET",
@@ -12,30 +12,33 @@ const options = {
   },
 };
 
-function isCacheValid(timestamp) {
-  return timestamp && Date.now() - timestamp < CACHE_TTL;
-}
+// function isCacheValid(timestamp) {
+//   return timestamp && Date.now() - timestamp < CACHE_TTL;
+// }
 
-export function useMovies(category, endpoint) {
+export function useMovies(category, baseUrl, page = 1) {
   const { state, dispatch } = useContext(MovieContext);
-  const { movies, cache, ui } = state;
+  const categoryState = state.movies[category];
 
   useEffect(() => {
     async function fetchMovies() {
-      if (movies[category]?.length && isCacheValid(cache[category])) return;
+      if (categoryState?.pages?.[page]) {
+        return;
+      }
 
       dispatch({ type: "FETCH_START" });
 
       try {
-        const res = await fetch(endpoint, options);
+        const res = await fetch(`${baseUrl}&page=${page}`, options);
         const data = await res.json();
-        console.log(data);        
 
         dispatch({
           type: "SET_MOVIE_LIST",
           payload: {
             category,
+            page,
             data: data.results,
+            totalPages: data.total_pages,
           },
         });
       } catch (err) {
@@ -47,11 +50,12 @@ export function useMovies(category, endpoint) {
     }
 
     fetchMovies();
-  }, [category, endpoint]);
+  }, [category, baseUrl, page]);
 
   return {
-    movies: movies[category],
-    loading: ui.loading,
-    error: ui.error,
+    movies: categoryState?.pages?.[page] || [],
+    totalPages: categoryState?.totalPages || 0,
+    loading: state.ui.loading,
+    error: state.ui.error,
   };
 }

@@ -1,15 +1,17 @@
-import { useState } from "react";
 import Pagination from "../components/Pagination";
 import { useMovies } from "../hooks/useMovies";
 import { TMDB_POPULAR_URL } from "../hooks/Urls";
 import MovieCard from "../components/Card";
+import { useSearchParams } from "react-router";
 
 export default function Popular() {
-  const [page, setPage] = useState(1);
+  const [params, setParams] = useSearchParams();
+  const page = Number(params.get("page")) || 1;
 
   const { movies, loading, totalPages } = useMovies(
     "popular",
-    `${TMDB_POPULAR_URL}&page=${page}`
+    `${TMDB_POPULAR_URL}`,
+    page,
   );
 
   if (loading) return <p>Loading...</p>;
@@ -17,7 +19,7 @@ export default function Popular() {
   return (
     <div className="flex flex-col justify-center gap-10 py-4 w-full">
       <div className="card flex flex-nowrap gap-6 px-6 overflow-x-auto w-full">
-        {movies.map(movie => (
+        {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
@@ -25,10 +27,8 @@ export default function Popular() {
       <Pagination
         currentPage={page}
         totalPages={totalPages}
-        onPageChange={setPage}
+        onPageChange={(p) => setParams({ page: p })}
       />
     </div>
   );
 }
-
-// implement pagination
