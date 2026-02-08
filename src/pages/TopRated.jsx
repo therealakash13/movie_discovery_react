@@ -3,6 +3,7 @@ import { useMovies } from "../hooks/useMovies";
 import { TMDB_POPULAR_URL, TMDB_TOP_RATED_URL } from "../hooks/Urls";
 import MovieCard from "../components/Card";
 import { useSearchParams } from "react-router";
+import Loader from "../components/Loader";
 
 export default function TopRated() {
   const [params, setParams] = useSearchParams();
@@ -14,7 +15,7 @@ export default function TopRated() {
     page,
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
 
   return (
     <div className="flex flex-col justify-center gap-10 py-4 w-full">
