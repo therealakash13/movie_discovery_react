@@ -5,7 +5,7 @@ import "ldrs/react/Waveform.css";
 export default function Loader() {
   return (
     <div className="flex flex-1 justify-center items-center">
-      <Waveform size="35" stroke="3.5" speed="1" color="#db0000" />;
+      <Waveform size="35" stroke="3.5" speed="1" color="#db0000" />
     </div>
   );
 }
