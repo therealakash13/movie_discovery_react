@@ -18,7 +18,7 @@ export default function TopRated() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex flex-col justify-center gap-10 py-4 w-full">
+    <div className="flex flex-col justify-evenly gap-10 py-4 w-full">
       <div className="card flex flex-nowrap gap-6 px-6 overflow-x-auto w-full">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />

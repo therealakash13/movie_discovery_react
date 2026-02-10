@@ -5,6 +5,7 @@ export const defaultState = {
     topRated: { totalPages: null, pages: {} },
     upcoming: { totalPages: null, pages: {} },
     search: { totalPages: null, pages: {} },
+    discover: { totalPages: null, pages: {} },
     details: null,
   },
 
