@@ -9,21 +9,24 @@ import Upcoming from "./pages/Upcoming.jsx";
 import Home from "./pages/Home.jsx";
 import Auth from "./pages/Auth.jsx";
 import MovieProvider from "./context/MovieProvider.jsx";
+import { AuthProvider } from "./context/AuthProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MovieProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Home />} />
-            <Route path="/popular" element={<Popular />} />
-            <Route path="/top-rated" element={<TopRated />} />
-            <Route path="/upcoming" element={<Upcoming />} />
-            <Route path="/auth" element={<Auth />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </MovieProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <MovieProvider>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<Home />} />
+              <Route path="/popular" element={<Popular />} />
+              <Route path="/top-rated" element={<TopRated />} />
+              <Route path="/upcoming" element={<Upcoming />} />
+              <Route path="/auth" element={<Auth />} />
+            </Route>
+          </Routes>
+        </MovieProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>,
 );
