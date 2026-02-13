@@ -13,4 +13,5 @@ export default function App() {
     </div>
   );
 }
-// create movie info page
+
+// finalize it or add more features like watch later per user

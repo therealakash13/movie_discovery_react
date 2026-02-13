@@ -3,7 +3,7 @@ import { MovieContext } from "../context/MovieContext";
 
 // const CACHE_TTL = 1000 * 60 * 10; // 10 min
 
-const options = {
+export const options = {
   method: "GET",
   headers: {
     accept: "application/json",

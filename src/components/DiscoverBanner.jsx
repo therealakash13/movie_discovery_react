@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Info, Play } from "../assets/SVGComponents";
 import { useAutoSlider } from "../hooks/useAutoSlider";
 
@@ -39,10 +40,12 @@ export default function DiscoverBanner({ movies }) {
             <Play />
             Play
           </button>
-          <button className="bg-gray-600/70 px-6 py-2 font-bold rounded cursor-pointer flex gap-2 items-center">
-            <Info />
-            View Info
-          </button>
+          <Link to={`/details/${movie.id}`}>
+            <button className="bg-gray-600/70 px-6 py-2 font-bold rounded cursor-pointer flex gap-2 items-center">
+              <Info />
+              View Info
+            </button>
+          </Link>
         </div>
       </div>
 

@@ -42,8 +42,8 @@ export default function Navbar() {
         {user 
         ? (<NavLink to="auth">
           <button className="bg-secondary text-white font-medium px-5 py-0.5 rounded cursor-pointer flex gap-3 justify-center items-center">
-            <img className="w-10 h-10 rounded-full border-2 border-secondary scale-120" src={user.providerData[0].photoURL} alt="" srcset="" />
-            {user.providerData[0].displayName}
+            <img className="w-10 h-10 rounded-full border-2 border-secondary scale-120" src={user?.photoURL} alt={user?.displayName} />
+            {user?.displayName}
           </button>
         </NavLink>) 
         :(<NavLink to="auth">
