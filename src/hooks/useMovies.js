@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
+import { FETCH_START, FETCH_SUCCESS } from "../context/action";
 
 // const CACHE_TTL = 1000 * 60 * 10; // 10 min
 
@@ -22,40 +23,32 @@ export function useMovies(category, baseUrl, page = 1) {
 
   useEffect(() => {
     async function fetchMovies() {
-      if (categoryState?.pages?.[page]) {
-        return;
-      }
-
-      dispatch({ type: "FETCH_START" });
+      dispatch({ type: FETCH_START, category });
 
       try {
         const res = await fetch(`${baseUrl}&page=${page}`, options);
         const data = await res.json();
 
         dispatch({
-          type: "SET_MOVIE_LIST",
+          type: FETCH_SUCCESS,
+          category,
           payload: {
-            category,
             page,
-            data: data.results,
+            results: data.results,
             totalPages: data.total_pages,
           },
         });
       } catch (err) {
-        dispatch({
-          type: "FETCH_ERROR",
-          payload: err.message,
-        });
+        dispatch({ type: "FETCH_ERROR", category, payload: err.message });
       }
     }
 
     fetchMovies();
-  }, [category, baseUrl, page]);
+  }, [baseUrl, page, category]);
 
   return {
-    movies: categoryState?.pages?.[page] || [],
-    totalPages: categoryState?.totalPages || 0,
+    movies: categoryState?.allMovies || [],
     loading: state.ui.loading,
-    error: state.ui.error,
+    totalPages: categoryState?.totalPages || 1,
   };
 }

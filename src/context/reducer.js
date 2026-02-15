@@ -1,7 +1,7 @@
 import {
   FETCH_ERROR,
   FETCH_START,
-  SET_MOVIE_LIST,
+  FETCH_SUCCESS,
   TOGGLE_THEME,
 } from "./action";
 
@@ -20,33 +20,48 @@ export function reducer(state, action) {
     case FETCH_START:
       return {
         ...state,
-        ui: { loading: true, error: null },
+        ui: { ...state.ui, loading: true, error: null },
       };
 
-    case "SET_MOVIE_LIST": {
-      const { category, page, data, totalPages } = action.payload;
+    case FETCH_SUCCESS: {
+      const { category, payload } = action;
+      const { page, results, totalPages } = payload;
+
+      const existingCategory = state.movies[category] || {
+        pages: {},
+        allMovies: [],
+        totalPages: 1,
+      };
+
+      if (existingCategory.pages[page]) return state;
+
+      const existingIds = new Set(existingCategory.allMovies.map((m) => m.id));
+
+      const uniqueMovies = results.filter(
+        (movie) => !existingIds.has(movie.id),
+      );
 
       return {
         ...state,
+        ui: { ...state.ui, loading: false, error: null },
         movies: {
           ...state.movies,
           [category]: {
-            ...state.movies[category],
-            totalPages,
             pages: {
-              ...state.movies[category].pages,
-              [page]: data,
+              ...existingCategory.pages,
+              [page]: true,
             },
+            totalPages,
+            allMovies: [...existingCategory.allMovies, ...uniqueMovies],
           },
         },
-        ui: { loading: false, error: null },
       };
     }
 
     case FETCH_ERROR:
       return {
         ...state,
-        ui: { loading: false, error: action.payload },
+        ui: { ...state.ui, loading: false, error: action.payload },
       };
 
     default:
