@@ -38,7 +38,7 @@ export const Moon = (props) => (
 
 export const Play = (props) => (
   <svg
-    fill="#000000"
+    fill="currentColor"
     width="26px"
     height="26px"
     viewBox="0 0 24 24"

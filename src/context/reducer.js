@@ -17,28 +17,36 @@ export function reducer(state, action) {
       };
     }
 
-    case FETCH_START:
+    case FETCH_START: {
+      const { category } = action;
+
       return {
         ...state,
-        ui: { ...state.ui, loading: true, error: null },
+        movies: {
+          ...state.movies,
+          [category]: {
+            ...state.movies[category],
+            loading: true,
+          },
+        },
       };
+    }
 
     case FETCH_SUCCESS: {
       const { category, payload } = action;
       const { page, results, totalPages } = payload;
 
-      const existingCategory = state.movies[category] || {
-        pages: {},
-        allMovies: [],
-        totalPages: 1,
-      };
+      const existingCategory = state.movies[category];
 
       if (existingCategory.pages[page]) {
         return {
           ...state,
-          ui: {
-            ...state.ui,
-            loading: false,
+          movies: {
+            ...state.movies,
+            [category]: {
+              ...existingCategory,
+              loading: false,
+            },
           },
         };
       }
@@ -51,15 +59,16 @@ export function reducer(state, action) {
 
       return {
         ...state,
-        ui: { ...state.ui, loading: false, error: null },
         movies: {
           ...state.movies,
           [category]: {
+            ...existingCategory,
+            loading: false,
+            totalPages,
             pages: {
               ...existingCategory.pages,
               [page]: true,
             },
-            totalPages,
             allMovies: [...existingCategory.allMovies, ...uniqueMovies],
           },
         },

@@ -48,7 +48,7 @@ export function useMovies(category, baseUrl, page = 1) {
 
   return {
     movies: categoryState?.allMovies || [],
-    loading: state.ui.loading,
+    loading: categoryState?.loading || false,
     totalPages: categoryState?.totalPages || 1,
   };
 }

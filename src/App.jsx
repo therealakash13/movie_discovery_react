@@ -23,3 +23,7 @@ export default function App() {
 // 3. Infinite Scroll Instead of Pagination - Done
 // 4. Movie Trailer Modal
 // 5. Advanced Filtering : Filter by rating, year or popularity
+// 6. Instead of modal make a media page as well where all the video like trailer and feature video clips and other goes
+// and instead of play make card go to details or media page (basically two buttons media and details).
+// There utilize all the data provided by tmdb video url
+// route would be like details page url (/media/id)

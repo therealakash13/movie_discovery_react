@@ -1,25 +1,16 @@
 export const defaultState = {
   movies: {
-    popular: { totalPages: null, pages: {}, allMovies: [] },
-    trending: { totalPages: null, pages: {}, allMovies: [] },
-    topRated: { totalPages: null, pages: {}, allMovies: [] },
-    upcoming: { totalPages: null, pages: {}, allMovies: [] },
-    search: { totalPages: null, pages: {}, allMovies: [] },
-    discover: { totalPages: null, pages: {}, allMovies: [] },
+    popular: { totalPages: null, pages: {}, allMovies: [], loading: false },
+    trending: { totalPages: null, pages: {}, allMovies: [], loading: false },
+    topRated: { totalPages: null, pages: {}, allMovies: [], loading: false },
+    upcoming: { totalPages: null, pages: {}, allMovies: [], loading: false },
+    search: { totalPages: null, pages: {}, allMovies: [], loading: false },
+    discover: { totalPages: null, pages: {}, allMovies: [], loading: false },
     details: null,
   },
 
-  cache: {
-    trending: {},
-    popular: {},
-    topRated: {},
-    upcoming: {},
-    search: {},
-  },
-
   ui: {
-    loading: false,
-    error: null,
+    error: null, // keep only global error here
   },
 
   user: {
