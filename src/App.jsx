@@ -23,4 +23,3 @@ export default function App() {
 // 3. Infinite Scroll Instead of Pagination - Done
 // 4. Movie Trailer Modal
 // 5. Advanced Filtering : Filter by rating, year or popularity
-// Error: Sometimes moving across pages throws off infinite scroll and it stuck at loading.

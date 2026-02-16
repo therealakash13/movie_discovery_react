@@ -13,6 +13,8 @@ export default function Popular() {
     page,
   );
 
+  // console.log({ page, loading, totalPages });
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

@@ -33,7 +33,15 @@ export function reducer(state, action) {
         totalPages: 1,
       };
 
-      if (existingCategory.pages[page]) return state;
+      if (existingCategory.pages[page]) {
+        return {
+          ...state,
+          ui: {
+            ...state.ui,
+            loading: false,
+          },
+        };
+      }
 
       const existingIds = new Set(existingCategory.allMovies.map((m) => m.id));
 
