@@ -1,9 +1,6 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import Loader from "./Loader";
 import { useMovieDetails } from "../hooks/useMovieDetails";
-import { useState } from "react";
-import { useMovieTrailer } from "../hooks/useMovieTrailer";
-import TrailerModal from "./TrailerModal";
 import { Play } from "../assets/SVGComponents";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
@@ -12,9 +9,6 @@ const POSTER_BASE = "https://image.tmdb.org/t/p/w500";
 export default function MovieDetails() {
   const { id } = useParams();
   const { movie, loading } = useMovieDetails(id);
-
-  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
-  const { trailerKey } = useMovieTrailer(id);
 
   if (loading) return <Loader />;
 
@@ -65,12 +59,11 @@ export default function MovieDetails() {
                 </p>
               </div>
 
-              <button
-                onClick={() => setIsTrailerOpen(true)}
-                className="flex items-center gap-3 cursor-pointer bg-primary hover:bg-primary/80 px-5 py-2 rounded text-white font-bold transition"
-              >
-                <Play /> Watch Trailer
-              </button>
+              <Link to={`/media/${movie.id}`}>
+                <button className="flex items-center gap-3 cursor-pointer bg-primary hover:bg-primary/80 px-5 py-2 rounded text-white font-bold transition">
+                  <Play /> View Media
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -156,14 +149,6 @@ export default function MovieDetails() {
           </div>
         </div>
       </div>
-      <TrailerModal
-        isOpen={isTrailerOpen}
-        onClose={() => setIsTrailerOpen(false)}
-        trailerKey={trailerKey}
-      />
-      ;
     </>
   );
 }
-
-// fix this page or improve ui

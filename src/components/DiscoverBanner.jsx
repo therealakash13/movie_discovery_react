@@ -36,10 +36,12 @@ export default function DiscoverBanner({ movies }) {
         </p>
 
         <div className="flex gap-3">
-          <button className="bg-white text-black font-bold px-6 py-2 rounded cursor-pointer flex gap-2 items-center">
-            <Play />
-            Play
-          </button>
+          <Link to={`/media/${movie.id}`}>
+            <button className="bg-white text-black font-bold px-6 py-2 rounded cursor-pointer flex gap-2 items-center">
+              <Play />
+              Media
+            </button>
+          </Link>
           <Link to={`/details/${movie.id}`}>
             <button className="bg-gray-600/70 px-6 py-2 font-bold rounded cursor-pointer flex gap-2 items-center">
               <Info />

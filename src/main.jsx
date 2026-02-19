@@ -11,6 +11,7 @@ import Auth from "./pages/Auth.jsx";
 import MovieProvider from "./context/MovieProvider.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import MovieDetails from "./components/MoviesDetails.jsx";
+import MediaPage from "./pages/MediaPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/upcoming" element={<Upcoming />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/details/:id" element={<MovieDetails />} />
+              <Route path="/media/:id" element={<MediaPage />}/>
             </Route>
           </Routes>
         </MovieProvider>
