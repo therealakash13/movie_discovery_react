@@ -7,3 +7,5 @@ export const TMDB_UPCOMING_URL = `${baseUrl}/upcoming?language=${language}`;
 export const TMDB_DETAILS_URL = (id) => `${baseUrl}/${id}?language=${language}`;
 export const TMDB_VIDEO_URL = (id) => `${baseUrl}/${id}/videos?language=${language}`;
 export const TMDB_DISCOVER = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+export const TMDB_SEARCH = (query, page) => `https://api.themoviedb.org/3/search/movie?query=${query}&page=${page}`
+export const TMDB_SEARCH_MULTI = (query) => `https://api.themoviedb.org/3/search/multi?query=${query}&page=1`

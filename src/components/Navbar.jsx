@@ -37,7 +37,13 @@ export default function Navbar() {
           className="px-5 rounded-full py-0.5 transition-all"
         >
           Upcoming
-        </NavLink>
+        </NavLink>  
+        <NavLink
+          to="search"
+          className="px-5 rounded-full py-0.5 transition-all"
+        >
+          Search
+        </NavLink>  
         {/* if user exists show user info else */}
         {user 
         ? (<NavLink to="auth">

@@ -12,6 +12,7 @@ import MovieProvider from "./context/MovieProvider.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import MovieDetails from "./components/MoviesDetails.jsx";
 import MediaPage from "./pages/MediaPage.jsx";
+import Search from "./pages/Search.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/popular" element={<Popular />} />
               <Route path="/top-rated" element={<TopRated />} />
               <Route path="/upcoming" element={<Upcoming />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/details/:id" element={<MovieDetails />} />
               <Route path="/media/:id" element={<MediaPage />}/>
