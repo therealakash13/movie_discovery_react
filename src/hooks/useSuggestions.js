@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { options } from "./useMovies";
+import { options, TMDB_SEARCH_MULTI } from "../utils/Urls";
 
 export function useSuggestions(query) {
   const [suggestions, setSuggestions] = useState([]);
@@ -13,10 +13,10 @@ export function useSuggestions(query) {
 
     async function fetchSuggestions() {
       try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/search/multi?query=${normalizedQuery}`,
-          {...options, signal: controller.signal },
-        );
+        const res = await fetch(TMDB_SEARCH_MULTI(normalizedQuery), {
+          ...options,
+          signal: controller.signal,
+        });
 
         const data = await res.json();
         setSuggestions(data.results.slice(0, 6));

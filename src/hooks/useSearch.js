@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { options } from "./useMovies";
-import { TMDB_SEARCH } from "./Urls";
+
+import { options, TMDB_SEARCH_MULTI } from "../utils/Urls";
 
 export function useSearch(query, page) {
-  const [movies, setMovies] = useState([]);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     // Reset when query changes
-    setMovies([]);
+    setResults([]);
   }, [query]);
 
   useEffect(() => {
@@ -19,11 +19,11 @@ export function useSearch(query, page) {
       setLoading(true);
 
       try {
-        const res = await fetch(TMDB_SEARCH(query, page), options);
+        const res = await fetch(TMDB_SEARCH_MULTI(query, page), options);
 
         const data = await res.json();
 
-        setMovies((prev) => {
+        setResults((prev) => {
           const merged = [...prev, ...data.results];
           return Array.from(new Map(merged.map((m) => [m.id, m])).values());
         });
@@ -38,5 +38,5 @@ export function useSearch(query, page) {
 
     fetchSearch();
   }, [query, page]);
-  return { movies, loading, totalPages };
+  return { results, loading, totalPages };
 }

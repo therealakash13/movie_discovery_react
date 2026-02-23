@@ -1,17 +1,20 @@
-import { useMovies } from "../hooks/useMovies";
-import { TMDB_UPCOMING_URL } from "../hooks/Urls";
 import MovieCard from "../components/Card";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Loader from "../components/Loader";
+import { MovieContext } from "../context/MovieContext";
+import { useMedia } from "../hooks/useMedia";
 
 export default function Upcoming() {
   const [page, setPage] = useState(1);
   const observerRef = useRef();
-  const { movies, loading, totalPages } = useMovies(
-    "upcoming",
-    `${TMDB_UPCOMING_URL}`,
+  const { state } = useContext(MovieContext);
+  const mediaType = state.user.mediaType;
+
+  const { media, loading, totalPages } = useMedia({
+    mediaType,
+    category: "upcoming",
     page,
-  );
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,7 +36,7 @@ export default function Upcoming() {
   return (
     <>
       <div className="flex flex-wrap gap-4 items-center justify-center">
-        {movies.map((movie) => (
+        {media.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>

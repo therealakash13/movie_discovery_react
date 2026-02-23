@@ -19,7 +19,5 @@ export default function App() {
 
 // finalize it or add more features like:
 // 1. Watch list + Favorites
-// 2. Search with Debounce + Suggestions - Done
-// 3. Infinite Scroll Instead of Pagination - Done
-// 4. Movie Trailer Modal
 // 5. Advanced Filtering : Filter by rating, year or popularity
+// Fix: Discover page and search page. Maybe normalization issue

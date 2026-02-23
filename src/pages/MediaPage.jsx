@@ -1,14 +1,18 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useParams } from "react-router";
-import { useMovieMedia } from "../hooks/useMovieMedia";
 import { filterVideos, selectDefaultVideo } from "../utils/mediaUtils";
 import MediaPlayer from "../components/media/MediaPlayer";
 import MediaSidebar from "../components/media/MediaSidebar";
 import Loader from "../components/Loader";
+import { useMediaVideos } from "../hooks/useMediaVideos";
+import { MovieContext } from "../context/MovieContext";
 
 export default function MediaPage() {
   const { id } = useParams();
-  const { videos, loading } = useMovieMedia(id);
+  const { state } = useContext(MovieContext);
+  const mediaType = state.user.mediaType;
+  
+  const { videos, loading } = useMediaVideos(mediaType, id);
 
   const [activeVideo, setActiveVideo] = useState(null);
   const [category, setCategory] = useState("All");

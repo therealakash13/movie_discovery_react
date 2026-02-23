@@ -1,20 +1,30 @@
+export const createCategoryState = () => ({
+  totalPages: null,
+  pages: {},
+  allItems: [],
+  loading: false,
+});
+
 export const defaultState = {
-  movies: {
-    popular: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    trending: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    topRated: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    upcoming: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    search: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    discover: { totalPages: null, pages: {}, allMovies: [], loading: false },
-    details: null,
+  media: {
+    // dynamically filled like:
+    // movie_popular
+    // tv_popular
+    // movie_topRated
+  },
+
+  details: {
+    // movie_123
+    // tv_456
   },
 
   ui: {
-    error: null, // keep only global error here
+    error: null,
   },
 
   user: {
     watchList: [],
     theme: "dark",
+    mediaType: "movie",
   },
 };

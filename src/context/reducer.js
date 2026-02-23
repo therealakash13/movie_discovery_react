@@ -2,6 +2,7 @@ import {
   FETCH_ERROR,
   FETCH_START,
   FETCH_SUCCESS,
+  TOGGLE_MEDIA_TYPE,
   TOGGLE_THEME,
 } from "./action";
 
@@ -17,15 +18,31 @@ export function reducer(state, action) {
       };
     }
 
+    case TOGGLE_MEDIA_TYPE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          mediaType: action.payload,
+        },
+      };
+
     case FETCH_START: {
-      const { category } = action;
+      const { key } = action;
+
+      const existingCategory = state.media[key] || {
+        totalPages: null,
+        pages: {},
+        allItems: [],
+        loading: false,
+      };
 
       return {
         ...state,
-        movies: {
-          ...state.movies,
-          [category]: {
-            ...state.movies[category],
+        media: {
+          ...state.media,
+          [key]: {
+            ...existingCategory,
             loading: true,
           },
         },
@@ -33,17 +50,38 @@ export function reducer(state, action) {
     }
 
     case FETCH_SUCCESS: {
-      const { category, payload } = action;
+      const { key, payload } = action;
+
+      // 🔥 DETAILS HANDLER
+
+      if (payload.isDetails) {
+        return {
+          ...state,
+          details: {
+            ...state.details,
+            [key]: payload.data,
+          },
+        };
+      }
+
+      // 🔥 LIST HANDLER
+
       const { page, results, totalPages } = payload;
 
-      const existingCategory = state.movies[category];
+      const existingCategory = state.media[key] || {
+        totalPages: null,
+        pages: {},
+        allItems: [],
+        loading: false,
+      };
 
+      // ✅ Prevent refetching same page
       if (existingCategory.pages[page]) {
         return {
           ...state,
-          movies: {
-            ...state.movies,
-            [category]: {
+          media: {
+            ...state.media,
+            [key]: {
               ...existingCategory,
               loading: false,
             },
@@ -51,17 +89,18 @@ export function reducer(state, action) {
         };
       }
 
-      const existingIds = new Set(existingCategory.allMovies.map((m) => m.id));
-
-      const uniqueMovies = results.filter(
-        (movie) => !existingIds.has(movie.id),
+      // ✅ Prevent duplicate items
+      const existingIds = new Set(
+        existingCategory.allItems.map((item) => item.id),
       );
 
+      const uniqueItems = results.filter((item) => !existingIds.has(item.id));
+      
       return {
         ...state,
-        movies: {
-          ...state.movies,
-          [category]: {
+        media: {
+          ...state.media,
+          [key]: {
             ...existingCategory,
             loading: false,
             totalPages,
@@ -69,7 +108,7 @@ export function reducer(state, action) {
               ...existingCategory.pages,
               [page]: true,
             },
-            allMovies: [...existingCategory.allMovies, ...uniqueMovies],
+            allItems: [...existingCategory.allItems, ...uniqueItems],
           },
         },
       };
@@ -78,7 +117,10 @@ export function reducer(state, action) {
     case FETCH_ERROR:
       return {
         ...state,
-        ui: { ...state.ui, loading: false, error: action.payload },
+        ui: {
+          ...state.ui,
+          error: action.payload,
+        },
       };
 
     default:

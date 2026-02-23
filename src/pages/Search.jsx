@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useSearch } from "../hooks/useSearch";
+import {  useEffect, useRef, useState } from "react";
 import MovieCard from "../components/Card";
 import Loader from "../components/Loader";
 import { useDebounce } from "../hooks/useDebounce";
 import { useSuggestions } from "../hooks/useSuggestions";
+import { useSearch } from "../hooks/useSearch";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -14,10 +14,10 @@ export default function SearchPage() {
   const containerRef = useRef(null);
   const observerRef = useRef();
 
-  const { movies, loading, totalPages } = useSearch(debouncedQuery, page);
+  const { results, loading, totalPages } = useSearch(debouncedQuery, page);
 
   useEffect(() => {
-    if (!query || showSuggestions) return; // 👈 important
+    if (!query || showSuggestions) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -102,7 +102,7 @@ export default function SearchPage() {
       </div>
 
       <div className="flex flex-wrap gap-4 items-center justify-center">
-        {movies.map((movie) => (
+        {results.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
@@ -111,7 +111,7 @@ export default function SearchPage() {
 
       {loading && <Loader />}
 
-      {!loading && query && movies.length === 0 && (
+      {!loading && query && results.length === 0 && (
         <p className="text-center text-gray-400 mt-6">No results found.</p>
       )}
     </div>
