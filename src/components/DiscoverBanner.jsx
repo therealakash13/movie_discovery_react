@@ -11,11 +11,13 @@ export default function DiscoverBanner({ movies }) {
 
   const movie = movies[index];
 
+  const { id, mediaType, title, backdrop, rating, overview, year } = movie;
+
   return (
     <section
       className="relative h-[80vh] bg-cover bg-center transition-all duration-700"
       style={{
-        backgroundImage: `url(${IMAGE_BASE}${movie.backdrop_path})`,
+        backgroundImage: `url(${IMAGE_BASE}${backdrop})`,
       }}
     >
       {/* Gradient overlay */}
@@ -24,25 +26,23 @@ export default function DiscoverBanner({ movies }) {
       {/* Content */}
       <div className="relative z-10 max-w-3xl h-full flex flex-col gap-5 justify-end p-20 text-white dark:text-white">
         <div className="flex flex-col">
-          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
+          <h1 className="text-4xl font-bold mb-4">{title}</h1>
           <div className="flex gap-4 text-sm font-medium text-gray-300 mb-3">
-            <span className="text-lg">⭐ {movie.vote_average.toFixed(1)}</span>
-            <span className="text-lg">{movie.release_date?.slice(0, 4)}</span>
+            <span className="text-lg">⭐ {rating}</span>
+            <span className="text-lg">{year}</span>
           </div>
         </div>
 
-        <p className="text-xl font-semibold text-gray-200 mb-6">
-          {movie.overview}
-        </p>
+        <p className="text-xl font-semibold text-gray-200 mb-6">{overview}</p>
 
         <div className="flex gap-3">
-          <Link to={`/media/${movie.id}`}>
+          <Link to={`${mediaType}/${id}/media`}>
             <button className="bg-white text-black font-bold px-6 py-2 rounded cursor-pointer flex gap-2 items-center">
               <Play />
               Media
             </button>
           </Link>
-          <Link to={`/details/${movie.id}`}>
+          <Link to={`${mediaType}/${id}`}>
             <button className="bg-gray-600/70 px-6 py-2 font-bold rounded cursor-pointer flex gap-2 items-center">
               <Info />
               View Info

@@ -6,7 +6,7 @@ export default function MovieCard({ movie }) {
   const { id, mediaType, title, poster, rating, overview, year } = movie;
 
   return (
-    <Link to={`/${mediaType}/details/${id}`}>
+    <Link to={`/${mediaType}/${id}`}>
       <div
         className="group relative h-[98%] w-100 shrink-0 rounded-xl overflow-hidden 
                   bg-black transition-transform duration-300 ease-out hover:z-20 cursor-pointer"
@@ -14,7 +14,7 @@ export default function MovieCard({ movie }) {
         {/* Poster */}
         <img
           src={
-            poster ? `${IMAGE_BASE_URL}${poster}` : "/placeholder.jpg"
+            poster ? `${IMAGE_BASE_URL}${poster}` : "/placeholder.jpg"  // fix this use placeholders
           }
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300

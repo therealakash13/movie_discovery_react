@@ -7,22 +7,25 @@ import { normalizeMedia } from "../utils/normalizeMedia";
 export function useMediaDetails({ mediaType, id }) {
   const { state, dispatch } = useContext(MovieContext);
 
-  const key = `${mediaType}_${id}`;
-  const existingDetails = state.details[key];
+  const key = `${mediaType}_${id}`;  
+
+  const detailsState = state.details[key];
+  const existingData = detailsState?.data;
 
   useEffect(() => {
-    if (!id) return;
+    if (!mediaType || !id) return;
 
-    // ✅ If already cached, don’t refetch
-    if (existingDetails) return;
+    // ✅ Only skip if actual data exists
+    if (existingData) return;
 
     async function fetchDetails() {
-      dispatch({ type: FETCH_START, key });
+      dispatch({ type: FETCH_START, key, isDetails: true });
 
       try {
         const url = `${BASE_URL}/${mediaType}/${id}?language=${LANGUAGE}`;
         const res = await fetch(url, options);
         const data = await res.json();
+        
 
         const normalized = normalizeMedia(data, mediaType);
 
@@ -44,10 +47,10 @@ export function useMediaDetails({ mediaType, id }) {
     }
 
     fetchDetails();
-  }, [mediaType, id]);
+  }, [mediaType, id, existingData]);
 
   return {
-    media: existingDetails || null,
-    loading: !existingDetails,
+    media: existingData || null,
+    loading: detailsState?.loading ?? true,
   };
 }

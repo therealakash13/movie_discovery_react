@@ -5,10 +5,15 @@ import {
   TOGGLE_MEDIA_TYPE,
   TOGGLE_THEME,
 } from "./action";
+import { createCategoryState } from "./defaultState";
 
 export function reducer(state, action) {
   switch (action.type) {
-    case TOGGLE_THEME: {
+    // ===============================
+    // USER ACTIONS
+    // ===============================
+
+    case TOGGLE_THEME:
       return {
         ...state,
         user: {
@@ -16,7 +21,6 @@ export function reducer(state, action) {
           theme: state.user.theme === "dark" ? "light" : "dark",
         },
       };
-    }
 
     case TOGGLE_MEDIA_TYPE:
       return {
@@ -27,15 +31,29 @@ export function reducer(state, action) {
         },
       };
 
-    case FETCH_START: {
-      const { key } = action;
+    // ===============================
+    // FETCH START
+    // ===============================
 
-      const existingCategory = state.media[key] || {
-        totalPages: null,
-        pages: {},
-        allItems: [],
-        loading: false,
-      };
+    case FETCH_START: {
+      const { key, isDetails } = action;
+
+      // If this key exists in details, it's a details fetch
+      if (isDetails) {
+        return {
+          ...state,
+          details: {
+            ...state.details,
+            [key]: {
+              data: null,
+              loading: true,
+            },
+          },
+        };
+      }
+
+      // Otherwise treat as list/media
+      const existingCategory = state.media[key] || createCategoryState();
 
       return {
         ...state,
@@ -49,23 +67,28 @@ export function reducer(state, action) {
       };
     }
 
+    // ===============================
+    // FETCH SUCCESS
+    // ===============================
+
     case FETCH_SUCCESS: {
       const { key, payload } = action;
 
       // 🔥 DETAILS HANDLER
-
       if (payload.isDetails) {
         return {
           ...state,
           details: {
             ...state.details,
-            [key]: payload.data,
+            [key]: {
+              data: payload.data,
+              loading: false,
+            },
           },
         };
       }
 
       // 🔥 LIST HANDLER
-
       const { page, results, totalPages } = payload;
 
       const existingCategory = state.media[key] || {
@@ -75,7 +98,7 @@ export function reducer(state, action) {
         loading: false,
       };
 
-      // ✅ Prevent refetching same page
+      // Prevent refetching same page
       if (existingCategory.pages[page]) {
         return {
           ...state,
@@ -89,13 +112,13 @@ export function reducer(state, action) {
         };
       }
 
-      // ✅ Prevent duplicate items
+      // Prevent duplicate items
       const existingIds = new Set(
         existingCategory.allItems.map((item) => item.id),
       );
 
       const uniqueItems = results.filter((item) => !existingIds.has(item.id));
-      
+
       return {
         ...state,
         media: {
@@ -113,6 +136,10 @@ export function reducer(state, action) {
         },
       };
     }
+
+    // ===============================
+    // FETCH ERROR
+    // ===============================
 
     case FETCH_ERROR:
       return {

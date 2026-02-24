@@ -27,8 +27,8 @@ createRoot(document.getElementById("root")).render(
               <Route path="/upcoming" element={<Upcoming />} />
               <Route path="/search" element={<Search />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/details/:id" element={<MovieDetails />} />
-              <Route path="/media/:id" element={<MediaPage />}/>
+              <Route path="/:mediaType/:id" element={<MovieDetails />} />
+              <Route path="/:mediaType/:id/media" element={<MediaPage />}/>
             </Route>
           </Routes>
         </MovieProvider>
