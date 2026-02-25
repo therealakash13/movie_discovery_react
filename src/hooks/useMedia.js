@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
 import { FETCH_START, FETCH_SUCCESS, FETCH_ERROR } from "../context/action";
-import { BASE_URL, LANGUAGE, options } from "../utils/Urls";
+import { BASE_URL, LANGUAGE, options, TMDB_LIST_URL } from "../utils/Urls";
 import { normalizeMedia } from "../utils/normalizeMedia";
 
 export function useMedia({ mediaType, category, page = 1 }) {
@@ -20,11 +20,7 @@ export function useMedia({ mediaType, category, page = 1 }) {
       dispatch({ type: FETCH_START, key });
 
       try {
-        const url =
-          category === "discover"
-            ? `${BASE_URL}/discover/${mediaType}?language=${LANGUAGE}&page=${page}`
-            : `${BASE_URL}/${mediaType}/${category}?language=${LANGUAGE}&page=${page}`;
-
+        const url = TMDB_LIST_URL(mediaType,category,page);
         const res = await fetch(url, options);
         const data = await res.json();
 

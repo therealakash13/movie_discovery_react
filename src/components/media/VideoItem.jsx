@@ -2,8 +2,8 @@ export default function VideoItem({ video, isActive, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`flex gap-3 p-2 rounded cursor-pointer transition ${
-        isActive ? "bg-primary text-text-dark" : "hover:bg-secondary/30"
+      className={`flex gap-3 p-2 rounded cursor-pointer transition border border-secondary ${
+        isActive ? "bg-primary text-text-dark border-none" : "hover:bg-secondary/30"
       }`}
     >
       <img

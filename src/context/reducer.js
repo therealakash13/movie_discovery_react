@@ -27,7 +27,7 @@ export function reducer(state, action) {
         ...state,
         user: {
           ...state.user,
-          mediaType: action.payload,
+          mediaType: state.user.mediaType === "movie" ? "tv" : "movie",
         },
       };
 

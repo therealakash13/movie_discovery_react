@@ -12,7 +12,7 @@ export default function MediaPage() {
   const { state } = useContext(MovieContext);
   const mediaType = state.user.mediaType;
   
-  const { videos, loading } = useMediaVideos(mediaType, id);
+  const { videos, loading } = useMediaVideos({mediaType, id});
 
   const [activeVideo, setActiveVideo] = useState(null);
   const [category, setCategory] = useState("All");

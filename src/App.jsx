@@ -21,4 +21,4 @@ export default function App() {
 // 1. Watch list + Favorites
 // 5. Advanced Filtering : Filter by rating, year or popularity
 // fix this use placeholders
-// fix media page
+// make url building more dynamic and list pages more generalized and dynamic

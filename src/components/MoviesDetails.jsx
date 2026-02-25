@@ -35,20 +35,20 @@ export default function MediaDetails() {
           />
 
           <div className="max-w-3xl flex flex-col justify-between items-start py-1">
-            <div>
+            <div className="flex flex-col gap-3">
               <h1 className="text-5xl font-bold text-white">{title}</h1>
 
               {media.raw?.tagline && (
-                <p className="text-gray-300 mt-2 italic">{media.tagline}</p>
+                <p className="w-fit px-3 py-1 text-gray-300 outline rounded-full bg-transparent backdrop-blur-2xl">{media.raw?.tagline}</p>
               )}
 
-              <div className="flex gap-4 mt-4 text-md text-gray-300">
+              <div className="flex gap-4 text-md text-gray-300">
                 <span>{year}</span>
                 {runtime && <span>{runtime} min</span>}
-                <span>⭐ {rating}</span>
+                <span>⭐ {rating.toFixed(1)}</span>
               </div>
 
-              <div className="flex gap-2 mt-4 flex-wrap">
+              <div className="flex gap-2 flex-wrap">
                 {genres?.map((genre) => (
                   <span
                     key={genre.id}
@@ -59,10 +59,10 @@ export default function MediaDetails() {
                 ))}
               </div>
 
-              <p className="mt-6 text-gray-300 leading-6 text-lg">{overview}</p>
+              <p className="text-gray-300 leading-6 text-lg">{overview}</p>
             </div>
 
-            <Link to={`/${mediaType}/media/${media.id}`}>
+            <Link to={`/${mediaType}/${media.id}/media`}>
               <button className="flex items-center gap-3 cursor-pointer bg-primary hover:bg-primary/80 px-5 py-2 rounded text-white font-bold transition">
                 <Play /> View Media
               </button>

@@ -28,7 +28,7 @@ export default function DiscoverBanner({ movies }) {
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold mb-4">{title}</h1>
           <div className="flex gap-4 text-sm font-medium text-gray-300 mb-3">
-            <span className="text-lg">⭐ {rating}</span>
+            <span className="text-lg">⭐ {rating.toFixed(1)}</span>
             <span className="text-lg">{year}</span>
           </div>
         </div>

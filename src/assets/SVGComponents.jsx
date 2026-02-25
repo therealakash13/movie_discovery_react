@@ -114,3 +114,46 @@ export const Logout = (props) => (
     </defs>
   </svg>
 );
+
+export const Movie = (props) => (
+  <svg
+    width="26px"
+    height="26px"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M10.054 3 8.387 8h5.892l1.667-5h-5.892Z" fill={props.innerfill} />
+    <path
+      d="M7.946 3 6.279 8H2v2h20V8h-5.613l1.667-5H20.6A2.4 2.4 0 0 1 23 5.4v13.2a2.4 2.4 0 0 1-2.4 2.4H3.4A2.4 2.4 0 0 1 1 18.6V5.4A2.4 2.4 0 0 1 3.4 3h4.546Z"
+      fill={props.innerfill}
+    />
+  </svg>
+);
+
+export const TV = (props) => (
+  <svg
+    width="26px"
+    height="26px"
+    viewBox="0 0 512 512"
+    fill={props.innerfill}
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <title>{"ionicons-v5-f"}</title>
+    <path d="M447.86,384H64.14A48.2,48.2,0,0,1,16,335.86V128.14A48.2,48.2,0,0,1,64.14,80H447.86A48.2,48.2,0,0,1,496,128.14V335.86A48.2,48.2,0,0,1,447.86,384Z" />
+    <line
+      x1={128}
+      y1={416}
+      x2={384}
+      y2={416}
+      style={{
+        stroke: props.innerfill,
+        strokeLinecap: "round",
+        strokeMiterlimit: 10,
+        strokeWidth: 32,
+      }}
+    />
+  </svg>
+);

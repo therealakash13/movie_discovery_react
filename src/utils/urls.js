@@ -16,8 +16,15 @@ export const options = {
 };
 
 // Generic category list URLs
-export const TMDB_LIST_URL = (mediaType, category) =>
-  `${BASE_URL}/${mediaType}/${category}?language=${LANGUAGE}`;
+export const TMDB_LIST_URL = (mediaType, category, page) => {
+  if (category === "upcoming" && mediaType === "tv") {
+    return `${BASE_URL}/${mediaType}/on_the_air?language=${LANGUAGE}`;
+  }
+
+  if (category === "discover")
+    return `${BASE_URL}/discover/${mediaType}?language=${LANGUAGE}&page=${page}`;
+  else return `${BASE_URL}/${mediaType}/${category}?language=${LANGUAGE}&page=${page}`;
+};
 
 // Details
 export const TMDB_DETAILS_URL = (mediaType, id) =>
