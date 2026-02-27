@@ -17,8 +17,8 @@ export default function Home() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex flex-col justify-evenly py-6 w-full">
-      <h2 className="dark:text-text-dark text-text text-4xl font-semibold mb-4">
+    <div className="flex flex-col justify-between py-6 w-full">
+      <h2 className="dark:text-text-dark text-text text-3xl font-semibold mb-4">
         Discover {mediaType === "movie" ? "Movies" : "TV Shows"}
       </h2>
 

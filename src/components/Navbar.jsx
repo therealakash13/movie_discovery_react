@@ -29,7 +29,7 @@ export default function Navbar() {
           Popular
         </NavLink>
         <NavLink
-          to="top-rated"
+          to="top_rated"
           className="px-5 rounded-full py-0.5 transition-all"
         >
           Top Rated

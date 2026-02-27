@@ -1,10 +1,12 @@
 import MovieCard from "../components/Card";
 import { useContext, useEffect, useRef, useState } from "react";
 import Loader from "../components/Loader";
-import { MovieContext } from "../context/MovieContext";
 import { useMedia } from "../hooks/useMedia";
+import { MovieContext } from "../context/MovieContext";
+import { useParams } from "react-router";
 
-export default function Upcoming() {
+export default function MediaListPage() {
+  const { category } = useParams();
   const [page, setPage] = useState(1);
   const observerRef = useRef();
   const { state } = useContext(MovieContext);
@@ -12,7 +14,7 @@ export default function Upcoming() {
 
   const { media, loading, totalPages } = useMedia({
     mediaType,
-    category: "upcoming",
+    category,
     page,
   });
 
@@ -31,11 +33,11 @@ export default function Upcoming() {
     return () => {
       if (current) observer.unobserve(current);
     };
-  }, [loading]);
+  }, [loading,page,totalPages]);
 
-  return (
-    <>
-      <div className="flex flex-wrap gap-4 items-center justify-center">
+  return (  
+    <div className="w-full flex flex-col h-full py-6">
+      <div className="w-full flex flex-wrap gap-4 items-center justify-center">
         {media.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
@@ -44,6 +46,6 @@ export default function Upcoming() {
       <div ref={observerRef} className="h-10"></div>
 
       {loading && <Loader />}
-    </>
+    </div>
   );
 }

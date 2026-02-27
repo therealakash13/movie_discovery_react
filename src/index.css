@@ -16,6 +16,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  overflow-y: scroll;
+}
+
 a.active{
   font-weight: 600;
   color: #db0000;

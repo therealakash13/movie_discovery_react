@@ -30,7 +30,7 @@ export default function MediaPage() {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 h-212 bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
+    <div className="w-full flex flex-col lg:flex-row gap-4 h-212 bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
       <div className="flex-1">
         <MediaPlayer video={currentVideo} />
       </div>

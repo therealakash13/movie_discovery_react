@@ -63,7 +63,7 @@ export default function SearchPage() {
   }, []);
 
   return (
-    <div className="px-6 py-10">
+    <div className="py-6 w-full">
       <h1 className="text-3xl font-bold mb-6">Search Movies</h1>
 
       <div className="sticky top-16 z-40 backdrop-blur-md bg-bg/70 dark:bg-bg-dark/70 py-4 px-6">
