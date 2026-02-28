@@ -1,17 +1,15 @@
 import Loader from "../components/Loader";
 import DiscoverBanner from "../components/DiscoverBanner";
-import { MovieContext } from "../context/MovieContext";
-import { useContext } from "react";
 import { useMedia } from "../hooks/useMedia";
+import { useParams } from "react-router";
 
-export default function Home() {
-  const { state } = useContext(MovieContext);
-  const mediaType = state.user.mediaType;
+export default function Discover() {
+  const { mediaType } = useParams();
 
   const { media, loading } = useMedia({
     mediaType,
     category: "discover",
-    page: 1,  
+    page: 1,
   });
 
   if (loading) return <Loader />;

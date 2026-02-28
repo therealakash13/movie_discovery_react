@@ -1,4 +1,4 @@
-import Loader from "./Loader";
+import Loader from "../components/Loader";
 import { useMediaDetails } from "../hooks/useMediaDetails";
 import { Play } from "../assets/SVGComponents";
 import { Link, useParams } from "react-router";
@@ -62,7 +62,7 @@ export default function MediaDetails() {
               <p className="text-gray-300 leading-6 text-lg">{overview}</p>
             </div>
 
-            <Link to={`/${mediaType}/${media.id}/media`}>
+            <Link to={`/${mediaType}/media/${media.id}`}>
               <button className="flex items-center gap-3 cursor-pointer bg-primary hover:bg-primary/80 px-5 py-2 rounded text-white font-bold transition">
                 <Play /> View Media
               </button>
@@ -83,26 +83,26 @@ export default function MediaDetails() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-10 text-secondary">
             {media.raw?.budget > 0 && (
               <div>
-                <h3 className="font-semibold text-xl">Budget</h3>
-                <p>₹ {media.raw?.budget.toLocaleString("en-IN")}</p>
+                <h3 className="font-semibold text-xl dark:text-text-dark/80">Budget</h3>
+                <p className="dark:text-text-dark/50">₹ {media.raw?.budget.toLocaleString("en-IN")}</p>
               </div>
             )}
 
             {media.raw?.revenue > 0 && (
               <div>
-                <h3 className="font-semibold text-xl">Revenue</h3>
-                <p>₹ {media.raw?.revenue.toLocaleString("en-IN")}</p>
+                <h3 className="font-semibold text-xl dark:text-text-dark/80">Revenue</h3>
+                <p className="dark:text-text-dark/50">₹ {media.raw?.revenue.toLocaleString("en-IN")}</p>
               </div>
             )}
 
             <div>
-              <h3 className="font-semibold text-xl">Status</h3>
-              <p>{media.raw?.status}</p>
+              <h3 className="font-semibold text-xl dark:text-text-dark/80">Status</h3>
+              <p className="dark:text-text-dark/50">{media.raw?.status}</p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-xl">Languages</h3>
-              <p>
+              <h3 className="font-semibold text-xl dark:text-text-dark/80">Languages</h3>
+              <p className="dark:text-text-dark/50">
                 {media.raw?.spoken_languages
                   ?.map((lang) => lang.english_name)
                   .join(", ")}
@@ -110,8 +110,8 @@ export default function MediaDetails() {
             </div>
 
             <div>
-              <h3 className="font-semibold text-xl">Production Countries</h3>
-              <p>
+              <h3 className="font-semibold text-xl dark:text-text-dark/80">Production Countries</h3>
+              <p className="dark:text-text-dark/50">
                 {media.raw?.production_countries?.map((c) => c.name).join(", ")}
               </p>
             </div>

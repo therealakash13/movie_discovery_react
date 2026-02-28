@@ -2,10 +2,29 @@ import { useContext } from "react";
 import { Movie, TV } from "../assets/SVGComponents";
 import { MovieContext } from "../context/MovieContext";
 import { TOGGLE_MEDIA_TYPE } from "../context/action";
+import { useLocation, useNavigate } from "react-router";
 
 export default function MediaToggle() {
   const { state, dispatch } = useContext(MovieContext);
-  const type = state.user.mediaType;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const type = state.user?.mediaType;
+
+  const handleToggle = () => {
+    const newType = type === "movie" ? "tv" : "movie";
+
+    dispatch({ type: TOGGLE_MEDIA_TYPE });
+
+    const segments = location.pathname.split("/");
+
+    if (segments[1] === "movie" || segments[1] === "tv") {
+      segments[1] = newType;
+      navigate(segments.join("/"));
+    } else {
+      navigate(`/${newType}`);
+    }
+  };
 
   return (
     <div className="relative w-52 h-10 bg-secondary rounded-lg p-1 flex">
@@ -18,23 +37,29 @@ export default function MediaToggle() {
 
       {/* Movie Button */}
       <button
-        onClick={() => dispatch({ type: TOGGLE_MEDIA_TYPE })}
+        onClick={handleToggle}
         className={`relative z-10 flex-1 flex items-center justify-center gap-2 text-sm font-medium cursor-pointer transition-colors ${
           type === "movie" ? "text-white" : "text-gray-400"
         }`}
       >
-        <Movie className="w-4 h-4" innerfill={type === "tv" ? "#99a1af" : "#fff"} />
+        <Movie
+          className="w-4 h-4"
+          innerfill={type === "tv" ? "#99a1af" : "#fff"}
+        />
         Movies
       </button>
 
       {/* TV Button */}
       <button
-        onClick={() => dispatch({ type: TOGGLE_MEDIA_TYPE })}
+        onClick={handleToggle}
         className={`relative z-10 flex-1 flex items-center justify-center gap-2 text-sm font-medium cursor-pointer transition-colors ${
           type === "tv" ? "text-white" : "text-gray-400"
         }`}
       >
-        <TV className="w-4 h-4" innerfill={type === "movie" ? "#99a1af" : "#fff"}/>
+        <TV
+          className="w-4 h-4"
+          innerfill={type === "movie" ? "#99a1af" : "#fff"}
+        />
         TV Shows
       </button>
     </div>

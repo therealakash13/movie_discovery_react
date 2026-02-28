@@ -20,15 +20,6 @@ html {
   overflow-y: scroll;
 }
 
-a.active{
-  font-weight: 600;
-  color: #db0000;
-  text-decoration: underline;
-  text-underline-offset: 8px;
-  text-decoration-color: #db0000;
-  background: rgb(219, 0, 0, .2);
-}
-
 /* Hide scrollbar background */
 .card::-webkit-scrollbar {
   height: 10px;

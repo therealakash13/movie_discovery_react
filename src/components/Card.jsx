@@ -6,7 +6,7 @@ export default function MovieCard({ movie }) {
   const { id, mediaType, title, poster, rating, overview, year } = movie;
 
   return (
-    <Link to={`/${mediaType}/${id}`}>
+    <Link to={`/${mediaType}/detail/${id}`}>
       <div
         className="group relative h-[98%] w-100 shrink-0 rounded-xl overflow-hidden 
                   bg-black transition-transform duration-300 ease-out hover:z-20 cursor-pointer"
