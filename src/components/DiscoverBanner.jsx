@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 import { Info, Play } from "../assets/SVGComponents";
 import { useAutoSlider } from "../hooks/useAutoSlider";
+import backdrop_placeholder from '../assets/backdrop_placeholder.png'
+
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -17,7 +19,9 @@ export default function DiscoverBanner({ movies }) {
     <section
       className="relative h-[80vh] bg-cover bg-center transition-all duration-700"
       style={{
-        backgroundImage: `url(${IMAGE_BASE}${backdrop})`,
+        backgroundImage: backdrop
+          ? `url(${IMAGE_BASE}${backdrop})`
+          : `url(${backdrop_placeholder})`,
       }}
     >
       {/* Gradient overlay */}

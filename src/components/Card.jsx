@@ -14,7 +14,7 @@ export default function MovieCard({ movie }) {
         {/* Poster */}
         <img
           src={
-            poster ? `${IMAGE_BASE_URL}${poster}` : "/placeholder.jpg"  // fix this use placeholders
+            poster ? `${IMAGE_BASE_URL}${poster}` : "/src/assets/poster_placeholder.png"
           }
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300
