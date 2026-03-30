@@ -18,5 +18,5 @@ export default function App() {
 }
 
 // finalize it or add more features like:
-// 1. Watch list + Favorites
+// 1. Watch list + Favorites (firestore schema setup)
 // 5. Advanced Filtering : Filter by rating, year or popularity
