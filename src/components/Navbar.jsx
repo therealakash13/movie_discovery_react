@@ -4,6 +4,7 @@ import { MovieContext } from "../context/MovieContext";
 import { TOGGLE_THEME } from "../context/action";
 import { useAuth } from "../hooks/useAuth";
 import MediaToggle from "./MediaToggle";
+import { ProfilePlaceholder } from "../assets/SVGComponents";
 
 export default function Navbar() {
   const { user } = useAuth();
@@ -59,6 +60,7 @@ export default function Navbar() {
         {user ? (
           <NavLink to="/auth">
             <button className="bg-secondary text-white font-medium px-5 py-0.5 rounded cursor-pointer flex gap-3 justify-center items-center">
+              {user?.photoURL === undefined && <ProfilePlaceholder />}
               <img
                 className="w-10 h-10 rounded-full border-2 border-secondary scale-120"
                 src={user?.photoURL}
