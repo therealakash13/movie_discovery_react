@@ -1,14 +1,14 @@
-import { Google, Logout } from "../assets/SVGComponents";
-import { useAuth } from "../hooks/useAuth";
+import { Google, Logout } from "../../assets/SVGComponents";
+import { useAuth } from "../../hooks/useAuth";
 
 export const LoginButton = () => {
-  const { login, loading } = useAuth();
+  const { googleLogin, loading } = useAuth();
 
   if (loading) return null;
 
   return (
     <button
-      onClick={login}
+      onClick={googleLogin}
       className="flex gap-3 items-center dark:bg-text-dark dark:text-text px-5 py-3 rounded font-bold cursor-pointer bg-bg-dark text-text-dark"
     >
       <Google />

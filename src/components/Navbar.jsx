@@ -66,7 +66,7 @@ export default function Navbar() {
                 src={user?.photoURL}
                 alt={user?.displayName}
               />
-              {user?.displayName}
+              {user?.username}
             </button>
           </NavLink>
         ) : (

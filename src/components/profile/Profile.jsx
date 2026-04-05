@@ -10,14 +10,13 @@ export default function Profile() {
 
   return (
     <div className="dark:bg-bg-dark dark:text-text-dark p-10">
-      <ProfileHeader user={user.providerData[0]} />
-      <ProfileDetails
-        user={user}
-        uid={user.uid}
-        isVerified={user.emailVerified}
-        metaData={user.metadata}
-        provider={user.providerData[0]?.providerId}
+      <ProfileHeader
+        username={user.username}
+        photoURL={user.photoURL}
+        email={user.email}
       />
+      {/* <ProfileDetails user={user} /> */}
+      {/* instead of profile details show watch list an more */}
     </div>
   );
 }
